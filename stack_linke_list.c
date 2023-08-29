@@ -82,15 +82,3 @@ void display()
         printf("%d",temp->data);
     }
 }
-
-void peek()
-{
-    if(head==NULL)
-        printf("Stack is empty");
-
-    else
-    {
-        struct node *temp=head;
-        printf("%d",temp->data);
-    }
-}
