@@ -47,16 +47,10 @@ void main()
 void push(int x)
 {
     struct node *new= malloc(sizeof(struct node));
-    struct node *temp=head;
-
-    while(temp->next!=NULL)
-    {
-        temp=temp->next;
-    }
 
     new->data=x;
-    new->next=NULL;
-    temp->next=new;
+    new->next=head;
+    head=new;
 }
 
 void pop()
@@ -66,16 +60,7 @@ void pop()
 
     else
     {
-        struct node *temp=head->next;
-        struct node *prev=head;
-
-        while(temp->next!=NULL)
-        {
-            temp=temp->next;
-            prev=prev->next;
-        }
-
-        prev->next=NULL;
+        head=head->next;
     }
 }
 
