@@ -13,7 +13,7 @@ struct exp *head=NULL;
 void postfix(char c);
 void push(char c);
 int precedency(char c);
-void pop(char c);
+int pop(char c);
 void is_not_alnum(char c);
 
 void main()
@@ -56,32 +56,41 @@ void is_not_alnum(char c)
 
         else if(c==')')
         {
-
-            while(head->next!=NULL)
+            while(head->op!='(')
             {
-                while(head->op!=')')
-                {
-                    printf("%c",head->op);
-                    head=head->next;
-                }
+                printf("%c",head->op);
+                head=head->next;
             }
+
+            head=head->next;
         }
 
         else if(c=='+' || c=='-' || c=='*' || c=='/')
         {
+            //printf("operators=%c\n",c);
+
             if(head==NULL)
             {
                 push(c);
-                //printf("%c",c);
             }
 
             else
             {
+
+                //printf("+=%d\n",precedency(c));
+                //printf("%c=%d\n",head->op,precedency(head->op));
+
                 if(precedency(c)>precedency(head->op))
+                {
+                    //printf("prec greater=%c\n",head->op);
                     push(c);
+                }
 
                 else if(precedency(c)<=precedency(head->op))
+                {
+                    //printf("prec less than=%c\n",head->op);
                     pop(c);
+                }
             }
         }
 }
@@ -90,27 +99,35 @@ void push(char c)
 {
     struct exp *n=(struct exp *)malloc(sizeof(struct exp));
     n->op=c;
-    //printf("%c",n->op);
+    //printf("push=%c\n",n->op);
     n->next=head;
     head=n;
-    //printf("%c",head->op);
+    //printf("head=%c\n",head->op);
 }
 
 int precedency(char c)
 {
     if(c=='+' || c=='-')
-        return 1;
-
-    else if(c='/' || c=='*')
         return 2;
+
+    else if(c=='/' || c=='*')
+        return 3;
+
+    else if(c=='(' || c==')')
+        return 1;
 }
 
-void pop(char c)
+int pop(char c)
 {
 
     printf("%c",head->op);
-    head=head->next;
-    
+
+    if(head->next!=NULL)
+        head=head->next;
+
+    else
+        return 0;
+
     if(precedency(c)<=precedency(head->op))
         pop(c);
 }
