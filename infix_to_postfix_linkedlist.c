@@ -43,7 +43,7 @@ void main()
 
 void postfix(char c)
 {
-    if(isdigit(c))
+    if(isalnum(c))
             printf("%c",c);
 
     else
