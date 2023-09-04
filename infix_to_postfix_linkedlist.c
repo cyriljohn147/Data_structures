@@ -12,8 +12,9 @@ struct exp *head=NULL;
 
 void postfix(char c);
 void push(char c);
+void operators(char c);
 int precedency(char c);
-int pop(char c);
+int pop_less_prec(char c);
 void is_not_alnum(char c);
 
 void main()
@@ -51,48 +52,45 @@ void postfix(char c)
 
 void is_not_alnum(char c)
 {
-        if(c=='(')
-            push(c);
+    if(c=='(')
+        push(c);
 
-        else if(c==')')
+    else if(c==')')
+    {
+        while(head->op!='(')
         {
-            while(head->op!='(')
-            {
-                printf("%c",head->op);
-                head=head->next;
-            }
-
+            printf("%c",head->op);
             head=head->next;
         }
+        head=head->next;
+    }
 
-        else if(c=='+' || c=='-' || c=='*' || c=='/')
+    else if(c=='+' || c=='-' || c=='*' || c=='/')
+        operators(c);
+}
+
+void operators(char c)
+{
+    //printf("operators=%c\n",c);
+    if(head==NULL)
+        push(c);
+
+    else
+    {
+        //printf("+=%d\n",precedency(c));
+        //printf("%c=%d\n",head->op,precedency(head->op));
+        if(precedency(c)>precedency(head->op))
         {
-            //printf("operators=%c\n",c);
-
-            if(head==NULL)
-            {
-                push(c);
-            }
-
-            else
-            {
-
-                //printf("+=%d\n",precedency(c));
-                //printf("%c=%d\n",head->op,precedency(head->op));
-
-                if(precedency(c)>precedency(head->op))
-                {
-                    //printf("prec greater=%c\n",head->op);
-                    push(c);
-                }
-
-                else if(precedency(c)<=precedency(head->op))
-                {
-                    //printf("prec less than=%c\n",head->op);
-                    pop(c);
-                }
-            }
+            //printf("prec greater=%c\n",head->op);
+            push(c);
         }
+
+        else if(precedency(c)<=precedency(head->op))
+        {
+            //printf("prec less than=%c\n",head->op);
+            pop_less_prec(c);
+        }
+    }
 }
 
 void push(char c)
@@ -117,7 +115,7 @@ int precedency(char c)
         return 1;
 }
 
-int pop(char c)
+int pop_less_prec(char c)
 {
 
     printf("%c",head->op);
@@ -129,5 +127,5 @@ int pop(char c)
         return 0;
 
     if(precedency(c)<=precedency(head->op))
-        pop(c);
+        pop_less_prec(c);
 }
