@@ -117,7 +117,6 @@ int precedency(char c)
 
 int pop_less_prec(char c)
 {
-
     printf("%c",head->op);
 
     if(head->next!=NULL)
