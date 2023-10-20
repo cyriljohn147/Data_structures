@@ -19,37 +19,50 @@ bin *newNode(int num) {
     return new;
 }
 
-bin *insert(bin *root,int num) {
-    if(root == NULL)
-        return newNode(num);
-    if(root->val < num)
-        root->right = insert(root->right,num);
-    else if(root->val > num)
-        root->left = insert(root->left,num);
-    return root;
+bin *preorder(bin *root) {
+    if(root==NULL)
+        return NULL;
+    printf("%d\n",root->val);
+    preorder(root->left);
+    preorder(root->right);
 }
 
-void insertorder(bin *root)
-{
-    if(root == NULL)
-        return;
-    insertorder(root->left);
-    printf("%d ",root->val);
-    insertorder(root->right);
+bin *inorder(bin *root) {
+    if(root==NULL)
+        return NULL;
+
+    inorder(root->left);
+    printf("%d\n",root->val);
+    inorder(root->right);
+}
+
+bin *postorder(bin *root) {
+    if(root==NULL)
+        return NULL;
+    
+    postorder(root->left);
+    postorder(root->right);
+    printf("%d\n",root->val);
 }
 
 int main() {
-    bin *rootNode = NULL;
+    bin *rootNode = newNode(2);
+    rootNode->left = newNode(5);
+    rootNode->right = newNode(6);
 
-    rootNode= insert(rootNode,1);
-    rootNode = insert(rootNode,7);
-    rootNode = insert(rootNode,4);
-    rootNode = insert(rootNode,8);
-    rootNode = insert(rootNode,1);
-    rootNode = insert(rootNode,5);
-    rootNode = insert(rootNode,2);
-    rootNode = insert(rootNode,9);
-    rootNode = insert(rootNode,3);
-    insertorder(rootNode);
+    rootNode->left->left = newNode(10);
+    rootNode->left->right = newNode(1);
+    rootNode->right->left = newNode(4);
+    rootNode->right->right = newNode(7);
+
+    printf("Predorder\n");
+    preorder(rootNode);
+
+    printf("Inorder\n");
+    inorder(rootNode);
+
+    printf("Postorder\n");
+    postorder(rootNode);
+
     return 0;
 }
