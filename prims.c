@@ -1,3 +1,5 @@
+//PRIMS ALGORITHM IMPLEMENTATION
+
 #include<stdio.h>
 #include<stdlib.h>
 #define infinity 9999
