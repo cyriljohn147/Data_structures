@@ -16,8 +16,8 @@ struct Node* newNode(int item) {
 
 void inorder(struct Node* root) {
   if (root != NULL) {
-    inorder(root->left);
     printf("%d ", root->key);
+    inorder(root->left);
     inorder(root->right);
   }
 }
@@ -92,7 +92,7 @@ int search(struct Node *root,int num) {
       temp = temp->right;
 
     else if(temp->key > num)
-      temp = temp->left;
+       temp = temp->left;
   }
 
   return 0;
