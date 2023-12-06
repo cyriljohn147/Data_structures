@@ -81,6 +81,23 @@ struct Node* deleteNode(struct Node* root, int k) {
   }
 }
 
+int search(struct Node *root,int num) {
+  struct Node *temp = root;
+
+  while(temp!=NULL) {
+    if(temp->key == num)
+      return 1;
+
+    else if(temp->key < num)
+      temp = temp->right;
+
+    else if(temp->key > num)
+      temp = temp->left;
+  }
+
+  return 0;
+}
+
 int main() {
   struct Node* root = NULL;
   root = insert(root, 50);
@@ -111,6 +128,9 @@ int main() {
 
   printf("Modified BST tree after deleting both child Node:\n");
   inorder(root);
+
+  printf("\nSearch element 60:\n");
+  printf((search(root,60))?"Element found!":"Element not present in the list");
 
   return 0;
 }
