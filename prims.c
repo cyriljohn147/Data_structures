@@ -9,9 +9,10 @@ int G[MAX][MAX],spanning[MAX][MAX],n;
 
 int prims()
 {
-  int cost[MAX][MAX];
-  int u,v,min_distance,distance[MAX],from[MAX];
-  int visited[MAX],no_of_edges,i,min_cost,j;
+  int u,v,i,j,min_distance,min_cost,no_of_edges;
+  int cost[MAX][MAX],distance[MAX],visited[MAX],from[MAX];
+
+
   for(i=0;i<n;i++)
     for(j=0;j<n;j++)
     {
@@ -20,7 +21,8 @@ int prims()
 
       else
         cost[i][j]=G[i][j];
-        spanning[i][j]=0;
+      
+      spanning[i][j]=0;
     }//initialise visited[],distance[] and from[]
 
   distance[0]=0;
@@ -93,3 +95,10 @@ int main()
   printf("\n\nTotal cost of spanning tree=%d",total_cost);
   return 0;
 }
+
+// 0 3 1 6 0 0
+// 3 0 5 0 3 0
+// 1 5 0 5 6 4
+// 6 0 5 0 0 2
+// 0 3 6 0 0 6
+// 0 0 4 2 6 0

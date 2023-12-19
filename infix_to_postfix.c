@@ -49,9 +49,9 @@ void is_not_alnum(char c)
 
     else if(c==')')
     {
-        while(stack[top]!=')')
+        while(stack[top]!='(')
         {
-            printf("%d",stack[top]);
+            printf("%c",stack[top]);
             top--;
         }
         top--;
@@ -69,7 +69,7 @@ void operators(char c)
         push(c);
     }
 
-    else
+    elsie
     {
         //printf("+=%d\n",precedency(c));
         //printf("%c=%d\n",head->op,precedency(head->op));
@@ -91,7 +91,7 @@ void push(char c)
 {
     top++;
     stack[top]=c;
-    //printf(" head=%c ",stack[top]);
+    // printf(" head=%c ",stack[top]);
 }
 
 int precedency(char c)

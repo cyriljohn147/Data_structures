@@ -51,7 +51,7 @@ int main() {
                     key = arr[k];
                     i = hasht(key);
                     while (hash[i] != -1) {
-                        i = lp(i);
+                         i = lp(i);
                     }
                     hash[i] = key;
                 }
